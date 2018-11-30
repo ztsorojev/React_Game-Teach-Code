@@ -1,0 +1,50 @@
+body {
+	background-color: #282c34 !important;
+}
+
+#root {
+	/*background-color: #282c34;*/
+}
+
+.game-navbar {
+	z-index: 2;
+}
+
+.menu-item {
+	padding: 8px;
+	border-right: 1px solid #6a96a3;
+}
+
+.menu-item:hover {
+    background-color: #505b67;
+}
+
+.border-l {
+	border-left: 1px solid #6a96a3;
+}
+
+.footer {
+	position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+	background: #343a40;
+    padding: 10px;
+    text-align: right;
+    z-index: 1;
+}
+
+.btn-main {
+	background-color: white;
+    border: 1px solid #9a9da0;
+    color: #343a40;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 2px 5px #00000029;
+    transition: .2s all;
+}
+
+.btn-main:hover {
+	background-color: #343a40;
+	color: #9a9da0;
+}

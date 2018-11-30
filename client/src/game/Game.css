@@ -1,0 +1,38 @@
+.a1 {
+	/*background-image: url('./img/1.jpg');*/
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.a2 {
+	background-image: url('./img/2.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.a3 {
+	background-image: url('./img/3.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.a4 {
+	background-image: url('./img/4.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.game-container {
+	width: 50%;
+    overflow: hidden;
+}
+
+.game-container img {
+	margin-left: -25%;
+    /*height: 80%;
+    margin-top: 3%;*/
+}
