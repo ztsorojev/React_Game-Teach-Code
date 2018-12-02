@@ -29,6 +29,7 @@
 .game-container {
 	width: 50%;
     overflow: hidden;
+    position: relative;
 }
 
 .game-container img {
@@ -36,3 +37,68 @@
     /*height: 80%;
     margin-top: 3%;*/
 }
+
+.success-bg {
+	background-color: #00ffd4;
+}
+
+.error-bg {
+	background-color: #ff0042;
+}
+
+.msg-wrapper {
+	position: absolute;
+    bottom: 80px;
+    left: 0;
+    right: 0;
+    width: 80%;
+    margin: auto;   
+	box-shadow: 0 3px 5px #00000075;
+	-webkit-transition: all ss;
+    transition: all 1s;
+	animation: .5s ease-out 0s 1 slideInFromLeft;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+.success-msg-wrapper {
+	background: linear-gradient(150deg,#0066ff, #00ffd4);
+	border: 2px solid #05ffb7;
+}
+
+.error-msg-wrapper {
+	background: linear-gradient(to right,#9100ff, #ff0042);
+	border: 2px solid #881713;
+}
+
+
+
+.msg,
+.success-msg,
+.error-msg {
+	font-size: 20px;
+    font-weight: 300;
+    font-family: FuturaMD_BT;
+    padding: 15px;
+    margin: 0; 
+}
+
+.success-msg {
+	color: #f2feff;
+	text-shadow: 0 1px 2px #0e4e98;
+} 
+
+.error-msg {
+	color: #fbec85;
+	text-shadow: 0 1px 2px #720b07;
+} 

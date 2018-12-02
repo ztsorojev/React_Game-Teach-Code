@@ -8,6 +8,7 @@ class Game extends Component {
 		this.state = {
 			step: 1
 		};
+
 	}
 
 	componentDidUpdate(prevProps) {
@@ -27,10 +28,27 @@ class Game extends Component {
 		return imgElement;
 	}
 
+	displayMessage = () => {
+		if(this.props.isWorking===1) {
+			return (
+				<div className="success-bg msg-wrapper">
+					<div className="success-msg-wrapper"><p className="success-msg">Good job! Click on "Next" to continue the game!</p></div>
+				</div>
+			);
+		} else if(this.props.isWorking===0) {
+			return (
+				<div className="error-bg msg-wrapper">
+					<div className="error-msg-wrapper"><p className="error-msg">Seems like there is a mistake. Check your code again mate!</p></div>
+				</div>
+			);
+		}
+	}
+
 	render() {
 		return(
 			<div className="game-container">
 				{this.displayImage()}
+				{this.displayMessage()}
 			</div>
 		);
 	}

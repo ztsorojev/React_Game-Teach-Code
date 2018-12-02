@@ -50,3 +50,12 @@
 	outline: none;
 	color: white;
 }
+
+.btn-next {
+	padding: 10px 25px;
+    border: 2px solid #00ffe9;
+}
+
+.btn-next:hover {
+	color: #00ffe9;
+}

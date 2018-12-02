@@ -1,3 +1,21 @@
+@font-face {
+    font-family: pangramLight;
+    src: url("./lib/fonts/Pangram-Light.otf");
+}
+
+@font-face {
+    font-family: pangramRegular;
+    src: url("./lib/fonts/Pangram-Regular.otf");
+}
+
+@font-face {
+    font-family: FuturaMD_BT;
+    src: url("./lib/fonts/Futura-medium-bt.ttf");
+}
+
+
+/* ****************************************** */
+
 .App {
   text-align: center;
   display: flex;
