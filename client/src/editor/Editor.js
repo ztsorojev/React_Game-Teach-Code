@@ -8,15 +8,20 @@ class Editor extends Component {
 		this.state = {
 			userCode: "",
 			step: 1,
+			description: "",
 			instructions: "",
 			isWorking: -1	//-1 is the neutral state (user haven't ran code yet), 0 is false and 1 is true
 		};
+		this.test = "";
 	}
 
 	
 	componentDidMount() {
 		this.getInstructions()
-		  .then(res => this.setState({ instructions: res.instructions }))
+		  .then(res => {
+		  	this.setState({ description: res.description, instructions: res.instructions, userCode: res.code });
+		  	this.test = res.test;
+		  })
 		  .catch(err => console.log(err));
 	}
 
@@ -32,11 +37,11 @@ class Editor extends Component {
 		this.setState({userCode: event.target.value});
 	}
 
-	testCode = async (event) => {
+	testCode = (event) => {
 		event.preventDefault();
-		let step = this.state.step;
-		let url = '/api/test/' + step;
-		
+		/*let step = this.state.step;
+		let url = '/api/challenge/1/actiontest/' + step;
+	
 		const response = await fetch(url, {
 	      method: 'POST',
 	      headers: {
@@ -47,7 +52,23 @@ class Editor extends Component {
 	    const isWorkingStr = await response.text();
 	    let isWorking = (isWorkingStr === 'true') ? 1 : 0;
 
-	    if (response.status !== 200) isWorking = 0;
+	    if (response.status !== 200) isWorking = 0;*/
+
+	    //let args = this.props.args;
+	    let args = [];
+		let code = this.state.userCode;
+		let fun = new Function(args, code);
+
+		let isWorking = false;
+		try {
+			isWorking = fun() == this.test;
+			console.log(isWorking);
+		} catch(error) {
+			console.log(error);
+		}
+		isWorking = (isWorking == true) ? 1 : 0;
+
+
 
 	    this.setState({isWorking: isWorking});
 	   
@@ -56,7 +77,7 @@ class Editor extends Component {
 
 	getInstructions = async () => {
 		let step = this.state.step;
-		let url = '/api/challenge/' + step;
+		let url = '/api/challenge/1/action/' + step;
 		try {
 			const response = await fetch(url);
 			const body = await response.json();
@@ -84,7 +105,7 @@ class Editor extends Component {
 	displayNext = (isWorking) => {
 		if(isWorking===1) {
 			console.log(isWorking);
-			return (<div className="text-right pr-5 pl-5 pt-3"><button className="btn-main btn-next" onClick={this.setNext} >Next</button></div>);
+			return (<div className="text-right next-wrapper"><button className="btn-main btn-next" onClick={this.setNext} >Next</button></div>);
 		}
 
 	}
@@ -94,6 +115,7 @@ class Editor extends Component {
 		this.setState({
 			userCode: "",
 			step: current_step + 1,
+			description: "",
 			instructions: "",
 			isWorking: -1
 		});
@@ -107,10 +129,13 @@ class Editor extends Component {
 			<div className="editor-container">
 				{/*<textarea className="code" ref={this.setUserCode}></textarea>
 				<button onClick={this.runCode}>Run</button>*/}
-				<div className="game-instructions p-4 pt-5">
+				<div className="game-instructions p-4">
+					<h3>Challenge 1: Castle Conquest</h3>
+					{this.state.description}
+					<hr/>
 					{this.state.instructions}
 				</div>
-				<form className="p-5" onSubmit={this.testCode}>
+				<form onSubmit={this.testCode}>
 					<textarea className="code" value={this.state.userCode} onChange={this.setUserCode} />
 					<a className="p-3 game-link" href="#">  <i className="fas fa-sync"></i> </a>
 					<input className="btn-main" type="submit" value="Run" />

@@ -16,12 +16,14 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/challenge', challengeRouter);
+app.use('/api/challenge', challengeRouter);
 
+/*
 app.get('/api/challenge/:step', (req, res) => {
 	let instructions = "Reinforcements won't arrive for another 3 weeks. Your garrison of 300 troops will have to last until then.";
 	res.send({ instructions: instructions });
 });
+
 
 app.post('/api/test/:step', (req, res) => {
 	console.log(req.body.args);
@@ -35,6 +37,7 @@ app.post('/api/test/:step', (req, res) => {
 
 	res.send(isWorking);
 });
+*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

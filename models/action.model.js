@@ -2,8 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let ActionSchema = new Schema({
-	id: Number,
+	actionid: Number,
+	challengeid: Number,
 	description: String,
+	instructions: String,
 	code: String,
 	test: String
 });

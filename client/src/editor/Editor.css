@@ -3,20 +3,22 @@
     left: 0;
     top: 0;
     width: 50%;
-    overflow: hidden;
+    overflow: auto;
+    padding-bottom: 80px;
 }
 
 .game-instructions {
 	color: white;
 	font-weight: 300;
-    width: 80%;
+    width: 90%;
+    font-size: 14px;
     margin: auto;
 }
 
 .editor-container form {
 	position: relative;
     height: 60%;
-    padding: 30px;
+    padding: 0 30px 40px 30px;
     text-align: right;
 }
 
@@ -51,6 +53,10 @@
 	color: white;
 }
 
+.next-wrapper {
+	padding: 20px 30px 0;
+}
+
 .btn-next {
 	padding: 10px 25px;
     border: 2px solid #00ffe9;
@@ -58,4 +64,31 @@
 
 .btn-next:hover {
 	color: #00ffe9;
+}
+
+/* Scroll bar */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border: 1px solid #e1e1e1;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    background-image: linear-gradient(to right, #399ccc, #16e6f48f);
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+    background-image: linear-gradient(to right, #0e8ac4, #16e6f48f);
 }

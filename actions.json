@@ -1,0 +1,18 @@
+[
+	{
+	    "actionid": 1,
+	    "challengeid": 1,
+	    "description": "A message intended for the governor of the castle has been intercepted by one of your spies! Breaking the code could reveal important information about weaknesses in the castle's defense!",
+	    "instructions": "The encrypted message has been saved into an array called 'message_array'. Your best cryptogrophers have writena function that they think will crack the code. Complete the for loop to iterate over the entire length of message_array to finish the decryption.",
+	    "code": "var message = \"Riefnroecemtn sow'n trairevf roa onhtre3 w eesk .oYrug rairos nfo3 00t orpo siwllh va eotl sa tnuit lhtne.\"; var message_array = Array.from(message); var temp;",
+	    "test": "Reinforcements won't arrive for another 3 weeks. Your garrison of 300 troops will have to last until then."
+	},
+	{
+	    "actionid": 2,
+	    "challengeid": 1,
+	    "description": "",
+	    "instructions": "",
+	    "code": "",
+	    "test": ""
+	},
+]
