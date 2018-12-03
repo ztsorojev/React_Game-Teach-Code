@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Code Game</title>
 
+	<script src="./jquery-3.3.1.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="./index.css">
 
     <!-- Font Awesome -->
@@ -37,18 +38,66 @@
             <a class="nav-link" href="#"><i class="fas fa-users"></i> &nbsp; Community</a>
           </li>
           <li class="nav-item menu-item">
-            <a class="nav-link" href="#"><i class="fas fa-comment"></i> &nbsp; Chat</a>
+            <a class="nav-link chat-toggle" href="#"><i class="fas fa-comment"></i> &nbsp; Chat</a>
           </li>
         </ul>
       </div>
     </nav>
 
     <div id="root"></div>
+	
+	<!--Chat related stuff-->
+	<div class = "login-chat-container close">
+	
+		<div class = "login-chat-title">Create Chat Name:</div>
+	
+		<form class = "create-username-box" onsubmit="saveUsername();
+											event.preventDefault();
+											">
+				<input type="text" name="textval" id = "saveUsernamebox"
+				placeholder="username" autocomplete="off" >
+		</form>
+		
+		<div class = "login-chat-submit">SUBMIT</div>
+	
+	</div>
+	
+	<div class = "chatbox-container">
+		<div class = "chatbox-topbar">
+			<div class = "close-chatbox">
+				<button class = "close-button">CLOSE</button>
+				<!--<i class="fas fa-window-close"></i>-->
+			</div>
+		</div>
+		<div class = "chatbox">
+			<ul class = "chatbox-list">
+			
+			<ul>
+			
+			
+		
+		</div>
+		
+		<form class = "form-box" onsubmit="sendChatMessage();
+											event.preventDefault();
+											document.getElementById('sendMsg').value = '';
+											">
+				<input type="text" name="textval" id = "sendMsg"
+				placeholder="type to chat" autocomplete="off" >
+				<div class = "sendChat">SEND</div>
+		</form>
+	</div>
+	
+	<!-- End chat related stuff -->
+	
+
+	
 
     <div class="footer">
       <button class="btn-main mr-3">Get Help</button>
     </div>
 
+	<script src="./setupInterface.js" type="text/javascript"></script>
 
   </body>
 </html>
