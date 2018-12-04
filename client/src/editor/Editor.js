@@ -10,6 +10,7 @@ class Editor extends Component {
 			step: 1,
 			description: "",
 			instructions: "",
+			userOutput: "",
 			isWorking: -1	//-1 is the neutral state (user haven't ran code yet), 0 is false and 1 is true
 		};
 		this.test = "";
@@ -28,9 +29,18 @@ class Editor extends Component {
 	componentDidUpdate(prevProps, prevState) {
 		let step = this.state.step; let isWorking = this.state.isWorking;
 		if(step !== prevState.step || isWorking !== prevState.isWorking) {
-			console.log("change");
+			console.log("change - step: " + step);
 			this.props.parentState(step, isWorking);
-		}	
+		}
+		//if we move to next step, get new description, instructions and code for user
+		if(step !== prevState.step)	{
+			this.getInstructions()
+			  .then(res => {
+			  	this.setState({ description: res.description, instructions: res.instructions, userCode: res.code });
+			  	this.test = res.test;
+			  })
+			  .catch(err => console.log(err));
+		}
 	}
 
 	setUserCode = (event) => {
@@ -57,19 +67,19 @@ class Editor extends Component {
 	    //let args = this.props.args;
 	    let args = [];
 		let code = this.state.userCode;
-		let fun = new Function(args, code);
 
-		let isWorking = false;
+		let isWorking = 0;
+		let userOutput = "";
 		try {
-			isWorking = fun() == this.test;
-			console.log(isWorking);
+			let fun = new Function(args, code);
+			userOutput = fun();
+			console.log(userOutput)
+			isWorking = (userOutput == this.test)? 1 : 0;
 		} catch(error) {
 			console.log(error);
 		}
-		isWorking = (isWorking == true) ? 1 : 0;
-
-
-
+		console.log("1 :" + userOutput)
+		this.setState({userOutput: userOutput});
 	    this.setState({isWorking: isWorking});
 	   
 		this.displayMessage(isWorking);
@@ -89,6 +99,32 @@ class Editor extends Component {
 			console.log(error);
 		}
 		return null;
+	}
+
+	displayUserOutput = (userOutput) => {
+		//console.log(userOutput);
+		//console.log("isWorking: " + this.state.isWorking);
+		if(this.state.isWorking === 1){
+			return (
+				<div className="output-msg">
+					<div className="alert alert-success alert-dismissible">
+						<strong>Correct output:</strong> &nbsp; {userOutput}
+					</div>
+				</div>
+			);
+		} else if(this.state.isWorking === 0) {
+			if(userOutput === undefined || userOutput === "") userOutput = "You didn't return anything.";
+			return (
+				<div className="output-msg">
+					<div className="alert alert-danger alert-dismissible">
+						<strong>Wrong output:</strong> &nbsp; {userOutput}
+					</div>
+				</div>
+			);
+		} else {
+			return (<div></div>);
+		}
+		
 	}
 
 	displayMessage = (isWorking) => {
@@ -117,6 +153,7 @@ class Editor extends Component {
 			step: current_step + 1,
 			description: "",
 			instructions: "",
+			userOutput: "",
 			isWorking: -1
 		});
 		//this.props.parentState(current_step + 1, -1);
@@ -130,7 +167,7 @@ class Editor extends Component {
 				{/*<textarea className="code" ref={this.setUserCode}></textarea>
 				<button onClick={this.runCode}>Run</button>*/}
 				<div className="game-instructions p-4">
-					<h3>Challenge 1: Castle Conquest</h3>
+					<h3>Castle Conquest: <span className="action-title">Action {this.state.step}</span></h3>
 					{this.state.description}
 					<hr/>
 					{this.state.instructions}
@@ -141,6 +178,7 @@ class Editor extends Component {
 					<input className="btn-main" type="submit" value="Run" />
 				</form>
 				{this.displayNext(this.state.isWorking)}
+				{this.displayUserOutput(this.state.userOutput)}
 			</div>
 		);
 	}

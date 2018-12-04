@@ -36,6 +36,14 @@ body {
     z-index: 1;
 }
 
+.challenge-link {
+    color: #9a9da0;
+}
+
+.challenge-link:hover {
+    color: rgba(255,255,255,.75);
+}
+
 .btn-main {
 	background-color: white;
     border: 1px solid #9a9da0;
