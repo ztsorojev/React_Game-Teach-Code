@@ -31,9 +31,7 @@ hr {
 
 .editor-container form {
 	position: relative;
-    height: 60%;
-    padding: 0 30px 40px 30px;
-    text-align: right;
+    padding: 0 50px 10px 50px;
 }
 
 .editor-container form input[type=submit] {
@@ -41,7 +39,7 @@ hr {
 }
 
 .output-msg {
-    padding: 20px 30px 0 30px;
+    padding: 20px 50px 0 50px;
 }
 
 .game-link {
@@ -71,8 +69,23 @@ hr {
 	color: white;
 }
 
+.code-editor {
+    text-align: left;
+    z-index: 0;
+    border: 1px solid #92fff659;
+    border-right: none;
+    box-shadow: 0 3px 10px 1px #00000014;
+}
+
+.CodeMirror-hscrollbar {
+    bottom: -1px !important;
+}
+.CodeMirror-vscrollbar{
+    right: -1px !important;
+}
+
 .next-wrapper {
-	padding: 20px 30px 0;
+	padding: 0 50px 0;
 }
 
 .btn-next {

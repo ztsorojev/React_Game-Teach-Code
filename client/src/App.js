@@ -11,6 +11,7 @@ class App extends Component {
       step: 1,
       isWorking: -1
     }
+    this.stepMax = 5;
   }
 
   setStep = (step, isWorking) => {
@@ -19,12 +20,24 @@ class App extends Component {
       isWorking: isWorking
     });
   }
+
+  displayWin = () => {
+    if(this.state.step === this.stepMax) {
+      let url = './img/winner.png';
+      return (
+        <div className="winner">
+          <img src={url} alt="Game"/>
+        </div>
+      );
+    }
+    
+  }
   
   render() {
     let argsProbl1 = ['a', 'b'];
     return (
       <div className="App">
-
+          {this.displayWin()}
           <Editor args={argsProbl1} parentState={this.setStep}/>
           <div className="separator"></div>
           <Game step={this.state.step} isWorking={this.state.isWorking}/>

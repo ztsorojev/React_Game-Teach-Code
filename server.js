@@ -8,7 +8,7 @@ const port = process.env.PORT || 5000;
 const mongoose = require('mongoose');
 let dev_db_url = 'mongodb://user1:edufun7@ds141932.mlab.com:41932/educationgamehci';
 let mongoDB = process.env.MONGODB_URI || dev_db_url;
-mongoose.connect(mongoDB);
+mongoose.connect(mongoDB, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));

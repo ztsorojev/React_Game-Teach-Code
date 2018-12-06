@@ -19,6 +19,7 @@
 .App {
   text-align: center;
   display: flex;
+  height: calc(100vh - 110px);
 }
 
 .App-header {
@@ -44,4 +45,47 @@
   background: #00ffe9;
 }
 
+.winner {
+  z-index: 5;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: #000000ad;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  justify-content: center;
+  -webkit-transition: all ss;
+  transition: all 1s;
+  -webkit-animation: .5s ease-in 1s 1 appear forwards;
+  animation: 1s ease-in 0.5s 1 appear forwards;
+}
 
+
+.winner img {
+  opacity: 0;
+  transform: scale(0);
+  animation: .5s ease-in 1.5s 1 appearScale forwards;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes appearScale {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

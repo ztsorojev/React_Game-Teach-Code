@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
+import {Controlled as CodeMirror} from 'react-codemirror2';
+import 'codemirror/mode/javascript/javascript';
 import './Editor.css';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/material.css';
+
 
 class Editor extends Component {
 
@@ -14,6 +19,7 @@ class Editor extends Component {
 			isWorking: -1	//-1 is the neutral state (user haven't ran code yet), 0 is false and 1 is true
 		};
 		this.test = "";
+		this.stepMax = 5;	//there are 4 steps in this game
 	}
 
 	
@@ -45,6 +51,10 @@ class Editor extends Component {
 
 	setUserCode = (event) => {
 		this.setState({userCode: event.target.value});
+	}
+
+	setUserCode2 = (editor, data, value) => {
+		this.setState({userCode: value});
 	}
 
 	testCode = (event) => {
@@ -107,7 +117,7 @@ class Editor extends Component {
 		if(this.state.isWorking === 1){
 			return (
 				<div className="output-msg">
-					<div className="alert alert-success alert-dismissible">
+					<div className="alert alert-success">
 						<strong>Correct output:</strong> &nbsp; {userOutput}
 					</div>
 				</div>
@@ -116,7 +126,7 @@ class Editor extends Component {
 			if(userOutput === undefined || userOutput === "") userOutput = "You didn't return anything.";
 			return (
 				<div className="output-msg">
-					<div className="alert alert-danger alert-dismissible">
+					<div className="alert alert-danger">
 						<strong>Wrong output:</strong> &nbsp; {userOutput}
 					</div>
 				</div>
@@ -139,7 +149,7 @@ class Editor extends Component {
 	}
 
 	displayNext = (isWorking) => {
-		if(isWorking===1) {
+		if(isWorking===1 && this.state.step < this.stepMax) {
 			console.log(isWorking);
 			return (<div className="text-right next-wrapper"><button className="btn-main btn-next" onClick={this.setNext} >Next</button></div>);
 		}
@@ -162,6 +172,11 @@ class Editor extends Component {
 
 
 	render() {
+		let options = {
+			lineNumbers: true,
+			theme: 'material',
+			mode: 'javascript'
+		};
 		return(
 			<div className="editor-container">
 				{/*<textarea className="code" ref={this.setUserCode}></textarea>
@@ -173,9 +188,21 @@ class Editor extends Component {
 					{this.state.instructions}
 				</div>
 				<form onSubmit={this.testCode}>
-					<textarea className="code" value={this.state.userCode} onChange={this.setUserCode} />
-					<a className="p-3 game-link" href="#">  <i className="fas fa-sync"></i> </a>
-					<input className="btn-main" type="submit" value="Run" />
+					{/*<textarea className="code" value={this.state.userCode} onChange={this.setUserCode} />*/}
+					<CodeMirror 
+						className="code-editor" 
+						value={this.state.userCode} 
+						onBeforeChange={(editor, data, value) => {
+							this.setState({ userCode: value });
+						}}
+						onChange={this.setUserCode2} 
+						options={options} 
+						autoFocus={true}
+					/>
+					<div className="text-right pt-2">
+						<a className="p-3 game-link" href="#">  <i className="fas fa-sync"></i> </a>
+						<input className="btn-main" type="submit" value="Run" />
+					</div>
 				</form>
 				{this.displayNext(this.state.isWorking)}
 				{this.displayUserOutput(this.state.userOutput)}
