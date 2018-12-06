@@ -1,0 +1,160 @@
+Pre-story description (before any coding takes place).
+"The foreign land of 
+
+// Action 1 ****************************************************************************************************************************
+story description: A message intended for the governor of the castle has been intercepted by one of your spies! Breaking the code could 
+				   reveal important information about weaknesses in the castle's defense!
+				   
+Programming instructions: The encrypted message has been saved into an array called "message_array". Your best cryptogrophers have writen
+						  a function that they think will crack the code. Complete the for loop to iterate over the entire length of	
+						  message_array to finish the decryption.
+						  
+Code that we'll provide: 
+var message = "Riefnroecemtn sow'n trairevf roa onhtre3 w eesk .oYrug rairos nfo3 00t orpo siwllh va eotl sa tnuit lhtne."; 
+var message_array = Array.from(message);
+var temp;
+
+for () { // add code to for loop
+	
+    if(i == 0) {
+    	document.write(message_array[i]);
+    }
+    
+    else if(i%2 != 0){
+    	if(i == message_array.length -1){
+    		document.write(message_array[i]);
+    	}
+    	else {
+        	temp = message_array[i]
+        }
+    }
+    
+    else {
+    	document.write(message_array[i]);
+        document.write(temp);
+    }
+} 
+
+Output to compare: Reinforcements won't arrive for another 3 weeks. Your garrison of 300 troops will have to last until then.
+
+
+// Action 2 **************************************************************************************************************************
+Story description: This is the moment you have been waiting for! With the guard of the castle reduced, now is your best chance to overthrow
+				   them! Assemble an army from the villagers and prepare to lead them to victory!
+				   
+Programming instructions: The "squadron" class will be used to assemble and organize youro troops. As their general, it is your job to 
+						  monitor the status of your squadron. Add a method that will return the number of soldiers still left alive in a 
+						  squadron. Once you have done that, create three new instances of a squadron and name them "archers", "swordsmen",
+						  and "spears". Finish by calling your check_strength function for each squadron.
+						  
+Code that we'll provide: 
+
+class squadron {
+    constructor(soldiers_alive) {
+        this.soldiers_alive = 200;
+    }
+	 check_strength() {
+        // Add code here
+    }
+	
+	
+    
+}
+
+// And here
+
+Output to compare: "200"
+
+// Action 3 **************************************************************************************************************************
+Story description: It is time to claim your legacy as the hero of your people! Use your squadrons strategically to attack the enemy,
+				   ensuring that each squadron is left with some survivors.
+				   
+Programming instructions: Rather than blindly attacking with all your troops, create a for loop that will attack with 20 troops at a time.
+						  After each attack, check the status of your troops to see how many are still alive. When 50 or less troops remian,
+						  send in a new squadron. This will require multiple for loops for each squadron.
+						  
+Code that we'll provide: 
+
+var total_enemies = 300;
+
+class squadron {
+    constructor(soldiers_alive) {
+        this.soldiers_alive = 200;
+    }
+    
+    check_strength() {
+        return this.soldiers_alive;
+    }
+    
+    fight(enemies) {
+    	this.soldiers_alive = this.soldiers_alive - enemies
+		total_enemies = total_enemies - enemies                // edit this line so that the total amount of enemies only decreases if there are surviving soldiers
+    }
+}
+
+var attacks = 1
+
+for(attacks = 1; ; attacks++){
+	// finish for loop and add code here
+}
+
+// add different for loops for each squadron
+
+if(total_enemies == 0)
+	document.write("The enemy is vanquished!")
+else	
+	document.write("Retreat!")
+	
+Output to compare: "The enemy is vanquisehd!"
+
+// Action 4 **************************************************************************************************************************
+Story description: The enemy troops are defeated, but the dragon remains! Your troops are scattered and ragged and need your leadership.
+				   Assemble the remains of each squadron into one squadron that you will use to attack the dragon! Knowing the legendary 
+				   fierceness of the dragon, only give the command to attack if your newly assembled squadron is at least 100 strong.
+				   
+Programming instructions: Use the transfer_to function to combine the three squadrons into one larger squadron. Then create an if-else
+						  statement to see if you have enough troops to attack the dragon. If you have less than 100, then run!
+						  
+Code that we'll provide: 
+
+class squadron {
+    constructor(soldiers_alive) {
+        this.soldiers_alive = 200;
+    }
+    
+    check_strength() {
+        return this.soldiers_alive;
+    }
+    
+    fight(enemies) {
+    	this.soldiers_alive = this.soldiers_alive - enemies
+		total_enemies = total_enemies - enemies                // edit this line so that the total amount of enemies only decreases if there are surviving soldiers
+    }
+	
+	run(){
+		document.write("We are cowards!")
+	}
+	
+	transfer_to(squadron, amount){
+		this.soldiers_alive = this.soldiers_alive - amount           // edit so they can't add too many troops. Add an option for max that adds all survivors.
+		squadron.soldiers_alive = squadron.soldiers_alive + amount
+	}
+	
+	attack_dragon(){
+		if(this.soldiers_alive > 100){
+			this.soldiers_alive = 1
+			document.write("The dragon is slayed!")
+		}
+		
+		else{
+			document.write("Your men are all dead and the dragon remains!")
+		}
+	}
+}
+
+// add code here
+	
+Output to compare: "The dragon is slayed!"
+
+
+

@@ -35,7 +35,7 @@ class Editor extends Component {
 	componentDidUpdate(prevProps, prevState) {
 		let step = this.state.step; let isWorking = this.state.isWorking;
 		if(step !== prevState.step || isWorking !== prevState.isWorking) {
-			console.log("change - step: " + step);
+			//console.log("change - step: " + step);
 			this.props.parentState(step, isWorking);
 		}
 		//if we move to next step, get new description, instructions and code for user
@@ -88,9 +88,14 @@ class Editor extends Component {
 		} catch(error) {
 			console.log(error);
 		}
-		console.log("1 :" + userOutput)
+		//console.log("1 :" + userOutput)
 		this.setState({userOutput: userOutput});
 	    this.setState({isWorking: isWorking});
+
+	    if(isWorking===1) {
+	    	var bg_music = new Audio('./sound/little_robot_sound_factory_Jingle_Win_Synth_05.mp3');
+			bg_music.play();
+	    }
 	   
 		this.displayMessage(isWorking);
 	}
@@ -150,7 +155,7 @@ class Editor extends Component {
 
 	displayNext = (isWorking) => {
 		if(isWorking===1 && this.state.step < this.stepMax) {
-			console.log(isWorking);
+			//console.log(isWorking);
 			return (<div className="text-right next-wrapper"><button className="btn-main btn-next" onClick={this.setNext} >Next</button></div>);
 		}
 
@@ -167,7 +172,7 @@ class Editor extends Component {
 			isWorking: -1
 		});
 		//this.props.parentState(current_step + 1, -1);
-		console.log(this.state.step);
+		//console.log(this.state.step);
 	}
 
 

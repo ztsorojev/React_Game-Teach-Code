@@ -1,0 +1,34 @@
+[
+	{
+	    "actionid": 1,
+	    "challengeid": 1,
+	    "description": "A message intended for the governor of the castle has been intercepted by one of your spies! Breaking the code could reveal important information about weaknesses in the castle's defense!",
+	    "instructions": "The encrypted message has been saved into an array called 'message_array'. Your best cryptogrophers have written a function that they think will crack the code. Complete the for loop to iterate over the entire length of message_array to finish the decryption.",
+	    "code": "var message = \"Riefnroecemtn sow'n trairevf roa onhtre3 w eesk .oYrug rairos nfo3 00t orpo siwllh va eotl sa tnuit lhtne.\"; \nvar message_array = Array.from(message); \nvar temp; \nfor () { // add code to for loop \n\tif(i == 0) {\n\t\treturn(message_array[i]);\n\t}\n\telse if(i%2 != 0){\n\t\tif(i == message_array.length -1){\n\t\t\treturn(message_array[i]);\n\t\t}\n\t\telse {\n\t\t\ttemp = message_array[i];\n\t\t}\n\t}\n\telse {\n\t\treturn(message_array[i]);\n\t\treturn(temp);\n\t}\n} ",
+	    "test": "Reinforcements won't arrive for another 3 weeks. Your garrison of 300 troops will have to last until then."
+	},
+	{
+	    "actionid": 2,
+	    "challengeid": 1,
+	    "description": "This is the moment you have been waiting for! With the guard of the castle reduced, now is your best chance to overthrow them! Assemble an army from the villagers and prepare to lead them to victory!",
+	    "instructions": "The \"squadron\" class will be used to assemble and organize your troops. As their general, it is your job to  monitor the status of your squadron. Add a method that will return the number of soldiers still left alive in a squadron. Once you have done that, create three new instances of a squadron and name them \"archers\", \"swordsmen\", and \"spears\". Finish by calling your check_strength function for each squadron.",
+	    "code": "class squadron {\n\t constructor(soldiers_alive) {\n\t\t this.soldiers_alive = 200;\n\t }\n\tcheck_strength() {\n\t\t// Add code here\n\t}\n}\n// And here",
+	    "test": "200"
+	},
+	{
+	    "actionid": 3,
+	    "challengeid": 1,
+		"description": "It is time to claim your legacy as the hero of your people! Use your squadrons strategically to attack the enemy, ensuring that each squadron is left with some survivors.",
+	    "instructions": "Rather than blindly attacking with all your troops, create a for loop that will attack with 20 troops at a time. After each attack, check the status of your troops to see how many are still alive. When 50 or less troops remian, send in a new squadron. This will require multiple for loops for each squadron.",
+		"code": "var total_enemies = 300;\n\nclass squadron {\n\tconstructor(soldiers_alive) {\n\t\tthis.soldiers_alive = 200;\n\t}\n\tcheck_strength() {\n\t\treturn this.soldiers_alive;\n\t}\n\tfight(enemies) {\n\t\tthis.soldiers_alive = this.soldiers_alive - enemies;\n\t\ttotal_enemies = total_enemies - enemies;\n\t}\n}\n\nvar attacks = 1;\nfor(attacks = 1; attacks < 20; attacks++){\n\t// correct the for loop and add code here\n}\n\n// add different for loops for each squadron\n\n if(total_enemies == 0)\n\t{return(\"The enemy is vanquished!\")}\n else\n\t{ return(\"Retreat!\") }",
+	    "test": "The enemy is vanquisehd!"
+	},
+	{
+	    "actionid": 4,
+	    "challengeid": 1,
+		"description": "The enemy troops are defeated, but the dragon remains! Your troops are scattered and ragged and need your leadership. Assemble the remains of each squadron into one squadron that you will use to attack the dragon! Knowing the legendary fierceness of the dragon, only give the command to attack if your newly assembled squadron is at least 100 strong.",
+		"instructions": "Use the transfer_to function to combine the three squadrons into one larger squadron. Then create an if-else statement to see if you have enough troops to attack the dragon. If you have less than 100, then call the run function!",
+	    "code": "class squadron {\n\tconstructor(soldiers_alive) {\n\t\tthis.soldiers_alive = 200;\n\t}\n\tcheck_strength() {\n\t\treturn this.soldiers_alive;\n\t}\n\tfight(enemies) {\n\t\tthis.soldiers_alive = this.soldiers_alive - enemies;\n\t\t total_enemies = total_enemies - enemies\n\t}\n\trun(){\n\t\treturn(\"We are cowards!\")\n\t}\n\ttransfer_to(squadron, amount){\n\t\tthis.soldiers_alive = this.soldiers_alive - amount;\n\t\tsquadron.soldiers_alive = squadron.soldiers_alive + amount\n\t}\n\tattack_dragon(){\n\t\tif(this.soldiers_alive > 100){\n\t\t\tthis.soldiers_alive = 1;\n\t\t\treturn(\"The dragon is slayed!\")\n\t\t}\n\t\telse{\n\t\t\treturn(\"Your men are all dead and the dragon remains!\")\n\t\t}\n\t}\n}\n\n// add code here",
+		"test": "The dragon is slayed!"
+	},
+]

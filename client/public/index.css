@@ -158,7 +158,6 @@ body {
     
 }
  .chatbox {
-    width: 500px;
     height: 200px;
     padding-top: 10px;
     overflow-y: auto;
