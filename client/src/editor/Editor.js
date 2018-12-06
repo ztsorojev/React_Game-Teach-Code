@@ -201,7 +201,7 @@ class Editor extends Component {
 					/>
 					<div className="text-right pt-2">
 						<a className="p-3 game-link" href="#">  <i className="fas fa-sync"></i> </a>
-						<input className="btn-main" type="submit" value="Run" />
+						<input className="btn-main" id = "run_button" type="submit" value="Run" />
 					</div>
 				</form>
 				{this.displayNext(this.state.isWorking)}

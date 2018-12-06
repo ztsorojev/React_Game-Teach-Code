@@ -73,14 +73,14 @@ function readCurrentChat() {
 
 
 //Send the current chat box data to firebase
-function sendToFirebase(textval) {
+function sendToFirebase(username, textval) {
 	
 	var date = new Date(); 
 	var timestamp = date.getTime();
 	
 	var jsonString = '{"d1": {"text": 123}}';
 	console.log(jsonString);
-	var to_send = '{\"' + timestamp + '\": {"id": \"' + currentID + '\", "text": \"' + textval + '\"}}';
+	var to_send = '{\"' + timestamp + '\": {"id": \"' + username + '\", "text": \"' + textval + '\"}}';
 	$.ajax({
 		type: "POST",
 		url: "https://comm-app-d4cad.firebaseio.com/chat.json",
@@ -100,6 +100,7 @@ function sendToFirebase(textval) {
 
 //"delete" the previous chat data from firebase (actually just rewrites it all to null)
 function deleteChatData() {
+
 	$.ajax({
 		type: "PUT",
 		url: "https://comm-app-d4cad.firebaseio.com/chat.json",
@@ -115,9 +116,131 @@ function deleteChatData() {
 	});
 }
 
+//Add online status for this user
+function loginOnline() {
+	
+	var date = new Date(); 
+	var timestamp = date.getTime();
+	
+	var to_send = '{"id": \"' + currentID + '\", "timestamp": \"' + timestamp + '\"}';
+	
+	$.ajax({
+		type: "POST",
+		url: "https://comm-app-d4cad.firebaseio.com/online.json",
+		data: to_send,
+		success: function (msg) {
+		   //do something
+		   console.log("POST login online: " + JSON.stringify(msg));
+		},
+		error: function (errormessage) {
+			//do something else
+			console.log("POST login online ERRORs: " + JSON.stringify(errormessage));
+		}
+	});
+	
+	sendToFirebase(currentID, " joined the chat!");
+}
+
+//Update the current user in the database
+function updateCurrentUser(uniqueID) {
+	console.log("Updating new user" + uniqueID);
+	
+	var date = new Date(); 
+	var current_timestamp = date.getTime();
+	
+	var to_send = '{"id": \"' + currentID + '\", "timestamp": \"' + current_timestamp + '\"}';
+	
+	$.ajax({
+		type: "PUT",
+		url: "https://comm-app-d4cad.firebaseio.com/online/" + uniqueID + ".json",
+		data: to_send,
+		success: function (msg) {
+		   //do something
+		   console.log("POST login update: " + JSON.stringify(msg));
+		},
+		error: function (errormessage) {
+			//do something else
+			console.log("POST login update ERRORs: " + JSON.stringify(errormessage));
+		}
+	});
+}
+
+//Remove online user
+function removeOnlineUser(uniqueID, username) {
+	console.log("removing old user " + uniqueID);
+	
+	$.ajax({
+		type: "DELETE",
+		url: "https://comm-app-d4cad.firebaseio.com/online/" + uniqueID + ".json",
+		success: function (msg) {
+		   //do something
+		   console.log("POST login delete: " + JSON.stringify(msg));
+		},
+		error: function (errormessage) {
+			//do something else
+			console.log("POST login delete ERRORs: " + JSON.stringify(errormessage));
+		}
+	});
+	
+	sendToFirebase(username, " left the chat!");
+	
+}
+
+//Check current online users
+function findOnlineSelf(uniqueID, dataEntry) {
+	var id = dataEntry["id"];
+	var timestamp = dataEntry["timestamp"];
+	
+	var date = new Date(); 
+	var current_timestamp = date.getTime();
+	
+	//If the timestamp difference exceeds 10 seconds, delete this user
+	if(parseInt(current_timestamp) - parseInt(timestamp) > 10000) {
+		removeOnlineUser(uniqueID, id);
+	}
+	
+	//We found the ID, so update the new time
+	if(id == currentID) {
+		updateCurrentUser(uniqueID);
+	}
+}
+
+//Send online status
+function pingOnlineStatus() {
+	
+	$.ajax({
+		type: "GET",
+		url: "https://comm-app-d4cad.firebaseio.com/online.json",
+		dataType: "json"
+	}).done(function (res) {
+		console.log("Response:" + JSON.stringify(res));
+		
+		//Make sure response is not null
+		if(res != "null") {
+			var entries = Object.keys(res);
+			
+			//Get each entry under "online" not including the special randomized ID
+			for(index in entries) {
+				findOnlineSelf(entries[index], res[entries[index]]);
+			}
+		}
+		
+	}).fail(function (jqXHR, textStatus, errorThrown) {
+		console.log("AJAX call failed: " + textStatus + ", " + errorThrown);
+	});
+}
+
+
+//Check if another player has submitted 
+
 //Refresh the page every second to update the chat
 setInterval(function () {
 	 readCurrentChat();
+	 
+	 if(playerLoggedIn) {
+		 pingOnlineStatus();
+	 }
+	 
  }, 1000);
 
 
@@ -129,7 +252,7 @@ function sendChatMessage() {
 		deleteChatData();
 	}
 	else {
-		sendToFirebase(message);
+		sendToFirebase(currentID, message);
 	}
 }
 
@@ -168,6 +291,8 @@ function saveUsername() {
 		toggleChatContainer();
 		
 		playerLoggedIn = true;
+		
+		loginOnline();
 	}
 	
 }
@@ -201,5 +326,12 @@ $('.close-button').bind('click', function() {
 	toggleChatContainer();
 });
 
-//Create a new editor line at index 0
-//createNewEditorLine(0);
+setTimeout(function(){ 
+	$("#run_button").bind('click', function() {
+		if(playerLoggedIn) {
+			sendToFirebase(currentID, " - Submitted some Code!");
+		}
+		
+	});
+ }, 2000);
+
