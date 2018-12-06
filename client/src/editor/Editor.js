@@ -175,6 +175,10 @@ class Editor extends Component {
 		//console.log(this.state.step);
 	}
 
+	displayStep = () => {
+		if(this.state.step === this.stepMax) return "Finished";
+		else return ("Action " + this.state.step);
+	}
 
 	render() {
 		let options = {
@@ -187,7 +191,7 @@ class Editor extends Component {
 				{/*<textarea className="code" ref={this.setUserCode}></textarea>
 				<button onClick={this.runCode}>Run</button>*/}
 				<div className="game-instructions p-4">
-					<h3>Castle Conquest: <span className="action-title">Action {this.state.step}</span></h3>
+					<h3>Castle Conquest: <span className="action-title">{this.displayStep()}</span></h3>
 					{this.state.description}
 					<hr/>
 					{this.state.instructions}
