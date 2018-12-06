@@ -53,10 +53,7 @@ function createNewEditorLine(index) {
 		if(e.keyCode == 13) {
 			createNewEditorLine(new_index+1);
 		}
-	});
-
-	
-	
+	});	
 }
 
 //Get the current chat data from firebase
@@ -162,6 +159,10 @@ function toggleUsernameBox() {
 
 //Shows/hides the chatbox
 function toggleChatContainer() {
+
+	$(".chatbox").animate({
+	    scrollTop: $(".chatbox").get(0).scrollHeight
+	});
 	
 	//If the chatbox container is open, then we close it
 	if($( ".chatbox-container" ).hasClass( "show" )) {

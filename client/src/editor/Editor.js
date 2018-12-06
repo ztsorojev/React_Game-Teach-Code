@@ -83,7 +83,7 @@ class Editor extends Component {
 		try {
 			let fun = new Function(args, code);
 			userOutput = fun();
-			console.log(userOutput)
+			//console.log(userOutput)
 			isWorking = (userOutput == this.test)? 1 : 0;
 		} catch(error) {
 			console.log(error);

@@ -81,7 +81,8 @@ body {
     
 }
 .login-chat-container.close{
-    right: -100%;
+    /*right: -100%;*/
+    display: none;
 }
 .login-chat-title {
     color: white;
