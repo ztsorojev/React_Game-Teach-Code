@@ -12,11 +12,14 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
+    <script src="./jquery-3.3.1.js" type="text/javascript"></script>
+
   </head>
   <body>
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
+
     <nav class="game-navbar p-0 navbar navbar-expand-lg navbar-dark bg-dark">
       <ul class="navbar-nav mr-auto">
           <li class="nav-item menu-item">
@@ -31,7 +34,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav ml-auto">
+          
           <li class="nav-item menu-item border-l ">
+            <a class="nav-link play-music" href="#"><i class="fas fa-music"></i></a>
+          </li>
+          <li class="nav-item menu-item">
             <a class="nav-link" href="#"><i class="fas fa-play"></i> &nbsp; Play</a>
           </li>
           <li class="nav-item menu-item">
@@ -93,11 +100,62 @@
 
 	
 
-    <div class="footer">
+    <!--Chat related stuff-->
+    <div class = "login-chat-container close">
+    
+      <div class = "login-chat-title">Create Chat Name:</div>
+    
+      <form class = "create-username-box" onsubmit="saveUsername();
+                        event.preventDefault();
+                        ">
+          <input type="text" name="textval" id = "saveUsernamebox"
+          placeholder="username" autocomplete="off" >
+      </form>
+      
+      <div class = "login-chat-submit">Submit</div>
+    
+    </div>
+    
+    <div class = "chatbox-container">
+      <div class = "chatbox-topbar">
+        <div class = "close-chatbox">
+          <a class = "close-button"><i class="fas fa-times"></i></a>
+          <!--<i class="fas fa-window-close"></i>-->
+        </div>
+      </div>
+      <div class = "chatbox">
+        <ul class = "chatbox-list">
+        
+        <ul>
+        
+        
+      
+      </div>
+      
+      <form class = "form-box" onsubmit="sendChatMessage();
+                        event.preventDefault();
+                        document.getElementById('sendMsg').value = '';
+                        ">
+          <input type="text" name="textval" id = "sendMsg"
+          placeholder="type to chat" autocomplete="off" >
+          <div class="sendChat-container">
+            <div class = "sendChat"><i class="fas fa-angle-right"></i></div>
+          </div>
+      </form>
+    </div>
+    <!-- End chat related stuff -->
+
+
+    <div class="footer d-flex">
+      <div class="mr-auto">
+        <a class="nav-link challenge-link" href="#"><i class="fas fa-bars"></i> &nbsp; Challenge 1 </a>
+      </div>
       <button class="btn-main mr-3">Get Help</button>
     </div>
 
-	<script src="./setupInterface.js" type="text/javascript"></script>
+
+    <script src="./setupInterface.js" type="text/javascript"></script>
+
 
   </body>
 </html>

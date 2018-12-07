@@ -3,6 +3,21 @@ var timestamp = date.getTime();
 var playerLoggedIn = false;
 var currentID = timestamp;
 
+var bg_music = new Audio('./sound/ongoing_music.mp3');
+//bg_music.play();
+bg_music.loop = true;
+
+$('.play-music').click(function() {
+	if(bg_music.paused) {
+		bg_music.play();
+		$('.play-music').addClass('active');
+	} else {
+		bg_music.pause();
+		$('.play-music').removeClass('active');
+	}
+});
+
+
 //Converts json data of an entry into readable text items
 //Format is timestamp: {id: "", text:""}
 function parseJSONData(dataEntry) {
@@ -38,10 +53,8 @@ function createNewEditorLine(index) {
 		if(e.keyCode == 13) {
 			createNewEditorLine(new_index+1);
 		}
-	});
+	});	
 
-	
-	
 }
 
 //Get the current chat data from firebase
@@ -51,7 +64,7 @@ function readCurrentChat() {
 		url: "https://comm-app-d4cad.firebaseio.com/chat.json",
 		dataType: "json"
 	}).done(function (res) {
-		console.log("Response:" + JSON.stringify(res));
+		//console.log("Response:" + JSON.stringify(res));
 		
 		//clear the current chatbox items before refresh:
 		$(".chatbox-list").empty();
@@ -79,7 +92,8 @@ function sendToFirebase(textval) {
 	var timestamp = date.getTime();
 	
 	var jsonString = '{"d1": {"text": 123}}';
-	console.log(jsonString);
+	//console.log(jsonString);
+
 	var to_send = '{\"' + timestamp + '\": {"id": \"' + currentID + '\", "text": \"' + textval + '\"}}';
 	$.ajax({
 		type: "POST",
@@ -88,7 +102,7 @@ function sendToFirebase(textval) {
 		dataType: "json",
 		success: function (msg) {
 		   //do something
-		   console.log("POST: " + JSON.stringify(msg));
+		   //console.log("POST: " + JSON.stringify(msg));
 		},
 		error: function (errormessage) {
 			//do something else
@@ -106,7 +120,7 @@ function deleteChatData() {
 		data: "\"null\"",
 		success: function (msg) {
 		   //do something
-		   console.log("PUT DELETE: " + JSON.stringify(msg));
+		   //console.log("PUT DELETE: " + JSON.stringify(msg));
 		},
 		error: function (errormessage) {
 			//do something else
@@ -125,7 +139,6 @@ setInterval(function () {
 function sendChatMessage() {
 	var message = $("#sendMsg").val();
 	if(message == "deleteall") {
-		console.log("Deleting all messages");
 		deleteChatData();
 	}
 	else {
@@ -147,6 +160,9 @@ function toggleUsernameBox() {
 
 //Shows/hides the chatbox
 function toggleChatContainer() {
+	$(".chatbox").animate({
+	    scrollTop: $(".chatbox").get(0).scrollHeight
+	});
 	
 	//If the chatbox container is open, then we close it
 	if($( ".chatbox-container" ).hasClass( "show" )) {
@@ -163,7 +179,9 @@ function saveUsername() {
 	currentID = $("#saveUsernamebox").val();
 	
 	if(currentID != "") {
-		console.log("Created ID: " + currentID);
+
+		//console.log("Created ID: " + currentID);
+
 		$(".login-chat-container").addClass("close");
 		toggleChatContainer();
 		

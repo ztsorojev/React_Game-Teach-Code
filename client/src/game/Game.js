@@ -8,7 +8,7 @@ class Game extends Component {
 		this.state = {
 			step: 1
 		};
-
+		this.stepMax = 5;
 	}
 
 	componentDidUpdate(prevProps) {
@@ -20,8 +20,10 @@ class Game extends Component {
 	}
 
 	displayImage() {
-		let url = './img/' + this.state.step + '.jpg'
+		let step = this.state.step;
+		let url = './img/' + step + '.jpg'
 		let imgElement = <img src={url} alt="Game"/>
+		
 		/*let url = 'a' + this.state.step;
 		let imgElement = <div className={url}></div>*/
 
