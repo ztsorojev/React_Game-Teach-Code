@@ -2,7 +2,7 @@
 Level up your coding skills by playing fun games :) <br>
 EvolvE is a practice based e-learning platform.
 
-**Stack:** React, Node.js, MongoDB, Express
+**Stack:** React, Node.js, MongoDB, Express <br>
 **Libraries:** Bootstrap, CodeMirror
 
 ## The Game
@@ -29,8 +29,8 @@ That's it, you won the game! <br>
 
 ### Chat
 The chat is accessible through the menu. You can use it to play with your friends or request the help of a mentor.
-![Alt text](https://github.com/ztsorojev/React_Game-Teach-Code/blob/master/chat_username.PNG)
-![Alt text](https://github.com/ztsorojev/React_Game-Teach-Code/blob/master/chat.PNG)
+<img src="https://github.com/ztsorojev/React_Game-Teach-Code/blob/master/chat_username.PNG" width="300" />   
+<img src="https://github.com/ztsorojev/React_Game-Teach-Code/blob/master/chat.PNG" width="300" />
 
 ## Setup
 
