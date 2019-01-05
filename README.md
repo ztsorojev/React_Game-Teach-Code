@@ -1,6 +1,7 @@
 # EvolvE 
-Level up your coding skills by playing fun games :) <br>
-EvolvE is a practice based e-learning platform.
+Level up your coding skills by playing fun games :)
+EvolvE is a practice based e-learning platform. <br>
+**Why we built this?** It's often hard to stay motivated learning online so we wanted to create a different kind of e-learning platform that would finally make this process much more fun and enjoyable.
 
 **Stack:** React, Node.js, MongoDB, Express <br>
 **Libraries:** Bootstrap, CodeMirror
