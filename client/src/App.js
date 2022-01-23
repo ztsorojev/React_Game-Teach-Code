@@ -10,7 +10,7 @@ class App extends Component {
     this.state = {
       step: 1,
       isWorking: -1,
-      erorr: null
+      error: null
     }
     this.stepMax = 5;
   }
