@@ -70,6 +70,12 @@
   animation: .5s ease-in 1.5s 1 appearScale forwards;
 }
 
+.error {
+  color: red;
+  text-align: center;
+  font-size: 1rem;
+}
+
 @keyframes appear {
   0% {
     opacity: 0;

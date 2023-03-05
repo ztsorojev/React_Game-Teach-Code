@@ -9,15 +9,17 @@ class App extends Component {
     super(props);
     this.state = {
       step: 1,
-      isWorking: -1
+      isWorking: -1,
+      error: null
     }
     this.stepMax = 5;
   }
 
-  setStep = (step, isWorking) => {
+  setStep = (step, isWorking, error) => {
     this.setState({
       step: step,
-      isWorking: isWorking
+      isWorking: isWorking,
+      erorr: error
     });
   }
 
@@ -35,6 +37,7 @@ class App extends Component {
   
   render() {
     let argsProbl1 = ['a', 'b'];
+    console.log(this.state.step)
     return (
       <div className="App">
           {this.displayWin()}

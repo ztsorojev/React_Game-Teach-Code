@@ -46,6 +46,10 @@ class Game extends Component {
 		}
 	}
 
+	handleSubmit = () => {
+		console.log("Do something");
+	}
+
 	render() {
 		return(
 			<div className="game-container">
